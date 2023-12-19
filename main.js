@@ -19,12 +19,40 @@ function playRound(){
         winner = 'user';
     }
 
-    console.log(user);
-    console.log(comp);
-    console.log(input);
-    console.log(winner + ' wins!')
-
     return winner;
 }
 
-playRound();
+function game(){
+    let winner = "none";
+    let user_score = 0;
+    let comp_score = 0;
+
+    console.log("Hi! Let's play rock, paper, scissors! The rules are simple, 5 rounds of you vs computer. Input either r, p, s to choose your shot.");
+
+    for (let i = 0; i<5; i++){
+        winner = playRound();
+        if (winner == "comp"){
+            comp_score++;
+            console.log("Oops, this round goes to the computer")
+            console.log(`The score is: \n Computer: ${comp_score} \n User: ${user_score}`)
+        } else if (winner == "user"){
+            user_score++;
+            console.log("Hooray, this round goes to the user")
+            console.log(`The score is: \n Computer: ${comp_score} \n User: ${user_score}`)
+        } else {
+            console.log("A Draw!");
+            console.log(`The score is: \n Computer: ${comp_score} \n User: ${user_score}`)
+        }
+    }
+
+    if (comp_score > user_score){
+        console.log("Computer wins!");
+    } else if (user_score > comp_score) {
+        console.log("User wins");
+    } else {
+        console.log("A Draw");
+    }
+    console.log(`The final score is: \n Computer: ${comp_score} \n User: ${user_score}`)
+}
+
+game();
