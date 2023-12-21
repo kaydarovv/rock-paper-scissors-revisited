@@ -4,28 +4,36 @@ function compChoice(){
 
 function playRound(userChoice){
     let winner = "draw";
+    let user = userChoice;
     let comp = compChoice();
-    user = (userChoice == "rock") ? 1 :
-            (userChoice == "paper") ? 2 :
-            (userChoice == "scissors") ? 3 : 0;
+    comp = (comp == 1) ? 'rock' :
+            (comp == 2) ? 'paper' :
+            (comp == 3) ? 'scissors' : 0;
 
     if (user == comp){
-        winner = 'draw';
-    } else if (((comp == 1)) && ((user == 3)) || (comp == 2) && (user == 1) || (comp == 3) && (user == 2)){
-        winner = 'comp';
+        winner = 'Noone';
+    } else if (((comp == 'rock')) && ((user == 'scissors')) || (comp == 'paper') && (user == 'rock') || (comp == 'scissors') && (user == 'paper')){
+        winner = 'Computer';
     } else {
-        winner = 'user';
+        winner = 'User';
     }
-    return winner;
+
+    return [user, comp, winner];
 };
 
-let user = "none";
+function displayScore(div, results){
+    div.textContent = `Your choice: ${results[0]} \n Computer's choice: ${results[1]} \n And the winner is ${results[2]}`;
+}
 
+let user = "none";
+let score = document.querySelector("#score");
 let menu = document.querySelector('#menu');
 menu.addEventListener("click", (event) => {
     let target = event.target;
     user = target.id;
-    playRound(user);
+    let results = playRound(user);
+    console.log(results);
+    displayScore(score, results)
 });
 
 
